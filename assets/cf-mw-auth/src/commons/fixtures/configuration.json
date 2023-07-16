@@ -1,0 +1,44 @@
+{
+  "logLevel": "silent",
+  "awsRegion": "us-east-1",
+  "cognitoIdpArn": "arn:aws:cognito-idp:us-east-1:000000000000:userpool/us-east-1_TESTPOOL",
+  "cognitoIdpDomain": "test.auth.us-east-1.amazoncognito.com",
+  "cognitoIdpRequiredGroup": "",
+  "cognitoIdpId": "us-east-1_TESTPOOL",
+  "cognitoIdpJwks": {
+    "keys": [
+      {
+        "alg": "RS256",
+        "e": "AQAB",
+        "kid": "w_Kvd6aNXPiQVj7ELBlr_3M1g17941i1A7TM8kM8iWQ",
+        "kty": "RSA",
+        "n": "5TWp7zqXouL6Sobv9HaFi3utY8NOHxeXbb4ToL--vJH5hK3kDoPtdq37Gc5O8eQlWBuBwbi7AjL-N0F1pvPQYM_bcCEaypheMj7BdD42yR-tlhacXPPMgYggRPW3ML1x4z8ge_pYBp-HccoljtWKP-tqe_XpJnhw3yxIm6oDvFMz9FZlnYvW2QESnujVNrR4pgzh1He3Ihv1uE3OmMoPrawsmUFo6o0_foqIF7cQL2ZJIc2T_fdwxG9aIpjY-KQ1lCSlFFVpfX1xTfDAnyAtZYDRPv5My4ku22Bm-xKwMj244VqizZeOyc4cDEe9BaywAtjSsMmgUyJlbHpeomT8-Q",
+        "use": "sig"
+      },
+      {
+        "alg": "RS256",
+        "e": "AQAB",
+        "kid": "ZKgb1NV5jU1UpB49YdWyRAYQ9j7sqIDWDAT/Igv16do=",
+        "kty": "RSA",
+        "n": "15iW8rGLu7CN0Jr0VWFdLo383p0SxQshC771JuQJObRNspE7QxhSE4-IK2jld0ZdNSuCr3T-cSAGlD57uLMNQYjK27lPyuzidLrlUoooyI4cScRwIuVjPinuATWmgqi1R3-yET1iFGssjeTqxJvW_GXcjSg_NgTpwOUqAZqH4LG-oJqPnAw0fYK4-0lb35MTqQmIJVogaI79PvjQ58FzbhG0EHEzO2L7eMlTBavMZlwbycSSHIqnrNd5qJ-JZaiBGN3HpncT1QfXRPnJyt8meJvWY4Nw_cpNmAHlGNX3S_vs5G7IQN81rT7l2xW_18AMECS9Y6haysHIk98IosIMGQ",
+        "use": "sig"
+      }
+    ]
+  },
+  "cognitoIdpClientId": "fake_client_id",
+  "cognitoIdpClientSecret": "abc123",
+  "cognitoIdpClientScopes": [
+    "phone",
+    "email",
+    "profile",
+    "openid"
+  ],
+  "redirectPathAuthRefresh": "/_edge/auth/refresh",
+  "redirectPathAuthSignIn": "/_edge/auth/signin",
+  "redirectPathAuthSignOut": "/",
+  "urlSignOut": "/_edge/auth/signout",
+  "oidcStateEncryptionKey": "12345678901234567890123456789012",
+  "opaPolicyEnabled": false,
+  "opaPolicyData": {},
+  "additionalCookies": {}
+}
