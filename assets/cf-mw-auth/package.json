@@ -1,0 +1,57 @@
+{
+  "name": "cf-mw-auth",
+  "version": "0.1.0",
+  "description": "cloudfront middleware for authentication at edge",
+  "main": "index.js",
+  "contributors": [
+    {
+      "name": "Brian Ojeda",
+      "email": "9335829+sgtoj@users.noreply.github.com"
+    }
+  ],
+  "scripts": {
+    "build": "npx tsc --noEmit && npx esbuild ./src/index.ts --bundle --platform=node --target=node18 --loader:.html=text --external:aws-lambda --log-level=warning --sourcemap --outfile=dist/index.js --minify",
+    "opa-build": "npm run opa-build:advanced_policy && npm run opa-build:sample_policy",
+    "opa-build:advanced_policy": "opa build -t wasm -e auth_at_edge_authz/results ./src/services/fixtures/advanced_policy.rego && tar -zxv -C ./src/services/fixtures/ -f bundle.tar.gz '/policy.wasm' && mv ./src/services/fixtures/policy.wasm ./src/services/fixtures/advanced_policy.wasm",
+    "opa-build:sample_policy": "opa build -t wasm -e sample/validate ./src/opa/fixtures/sample_policy.rego && tar -zxv -C ./src/opa/fixtures/ -f bundle.tar.gz '/policy.wasm' && mv ./src/opa/fixtures/policy.wasm ./src/opa/fixtures/sample_policy.wasm",
+    "opa-test": "npm run opa-test:advanced_policy && npm run opa-test:sample_policy",
+    "opa-test:sample_policy": "opa test -v ./src/opa/fixtures/sample_policy.rego ./src/opa/fixtures/sample_policy_test.rego",
+    "opa-test:advanced_policy": "opa test -v ./src/services/fixtures/advanced_policy.rego ./src/services/fixtures/advanced_policy_test.rego",
+    "test": "jest --coverage --detectOpenHandles --forceExit",
+    "tsc": "npx tsc",
+    "lint": "npx eslint src/**/*.ts"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-kms": "^3.370.0",
+    "@open-policy-agent/opa-wasm": "^1.8.0",
+    "aws-jwt-verify": "^4.0.0",
+    "axios": "^1.4.0",
+    "cookie": "^0.5.0",
+    "pino": "^8.14.1"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.6.1",
+    "@tsconfig/node18": "^18.2.0",
+    "@types/aws-lambda": "^8.10.119",
+    "@types/cookie": "^0.5.1",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^18.16.19",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "aws-sdk-client-mock": "^3.0.0",
+    "aws-sdk-client-mock-jest": "^3.0.0",
+    "axios-mock-adapter": "^1.21.5",
+    "esbuild": "^0.18.13",
+    "eslint": "^8.45.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.3",
+    "jest": "^29.6.1",
+    "jest-mock-axios": "^4.7.2",
+    "node-jose": "^2.2.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
+  }
+}

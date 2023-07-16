@@ -1,11 +1,14 @@
 # .gitignore
 
 # terraform files
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
 *.tfstate
 *.tfstate.*.backup
 *.tfstate.backup
 *.tfplan
 *.terraform/
+*.tfvars
 .grunt
 
 # node.js / typescript
