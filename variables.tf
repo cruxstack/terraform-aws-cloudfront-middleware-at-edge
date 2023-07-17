@@ -30,12 +30,6 @@ variable "urlrewrite_service_config" {
   default = {}
 }
 
-variable "destruction_delay" {
-  description = "Delay before destroying resources when they are deleted"
-  type        = string
-  default     = "20m"
-}
-
 variable "aws_account_id" {
   description = "The AWS account ID that the module will be deployed in"
   type        = string

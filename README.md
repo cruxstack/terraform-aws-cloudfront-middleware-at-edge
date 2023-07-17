@@ -62,7 +62,6 @@ other optional variables (e.g., `name`, `tags`, etc.) provided by the
 |---------------------------|---------------------------------------------------------------------------|:------:|:-------:|:--------:|
 | auth_service_config       | Configuration details for the authentication service. More details below. | object |  `{}`   |    no    |
 | urlrewrite_service_config | Configuration details for the URL rewrite service, More details below.    | object |  `{}`   |    no    |
-| destruction_delay         | Delay before destroying resources when they are deleted                   | string | `"20m"` |    no    |
 | aws_account_id            | The AWS account ID that the module will be deployed in                    | string |  `""`   |    no    |
 | aws_region_name           | The AWS region name where the module will be deployed                     | string |  `""`   |    no    |
 

@@ -3,7 +3,6 @@ locals {
   enabled                    = module.this.enabled
   auth_service_enabled       = local.enabled && var.auth_service_config.enabled
   urlrewrite_service_enabled = local.enabled && var.urlrewrite_service_config.enabled
-  destruction_delay_enabled  = var.destruction_delay != null
 
   aws_account_id  = try(coalesce(var.aws_account_id, data.aws_caller_identity.current[0].account_id), "")
   aws_region_name = try(coalesce(var.aws_region_name, data.aws_region.current[0].name), "")
@@ -83,16 +82,6 @@ data "aws_caller_identity" "current" {
 
 data "aws_region" "current" {
   count = module.this.enabled && var.aws_region_name == "" ? 1 : 0
-}
-
-resource "time_sleep" "destruction_delay" {
-  for_each = local.destruction_delay_enabled ? aws_lambda_function.auth_service : {}
-
-  destroy_duration = var.destruction_delay
-
-  triggers = {
-    arn = each.value.arn
-  }
 }
 
 # ====================================================== middleware-services ===
