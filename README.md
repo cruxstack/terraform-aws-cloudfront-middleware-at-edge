@@ -16,7 +16,7 @@ that provide middleware for AWS CloudFront.
 
 ```hcl
 module "cloudfront_middleware_at_edge" {
-  source  = "sgtoj/cloudfront-middleware-at-edge/aws"
+  source  = "cruxstack/cloudfront-middleware-at-edge/aws"
   version = "x.x.x"
 
   auth_service_config = {
@@ -45,18 +45,12 @@ module "cloudfront_middleware_at_edge" {
 }
 ```
 
-## Requirements
-
-- Terraform 1.3.0 or later
-- AWS provider
-- Docker provider
-- Docker installed and running on the machine where Terraform is executed
-
 ## Inputs
 
 In addition to the variables documented below, this module includes several
 other optional variables (e.g., `name`, `tags`, etc.) provided by the
-`cloudposse/label/null` module. Please refer to the [`cloudposse/label` documentation](https://registry.terraform.io/modules/cloudposse/label/null/latest) for more details on these variables.
+`cloudposse/label/null` module. Please refer to the [`cloudposse/label` documentation](https://registry.terraform.io/modules/cloudposse/label/null/latest)
+for more details on these variables.
 
 | Name                      | Description                                                               |  Type  | Default | Required |
 |---------------------------|---------------------------------------------------------------------------|:------:|:-------:|:--------:|
