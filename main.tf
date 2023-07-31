@@ -157,8 +157,8 @@ module "mw_auth_service_label" {
 }
 
 module "auth_service_code" {
-  source  = "sgtoj/artifact-packager/docker"
-  version = "1.2.3"
+  source  = "cruxstack/artifact-packager/docker"
+  version = "1.3.2"
 
   enabled                = local.auth_service_enabled
   attributes             = ["auth"]
@@ -235,8 +235,8 @@ module "mw_urlrewrite_service_label" {
 }
 
 module "urlrewrite_service_code" {
-  source  = "sgtoj/artifact-packager/docker"
-  version = "1.2.3"
+  source  = "cruxstack/artifact-packager/docker"
+  version = "1.3.2"
 
   enabled                = local.urlrewrite_service_enabled
   attributes             = ["urlrewrite"]
