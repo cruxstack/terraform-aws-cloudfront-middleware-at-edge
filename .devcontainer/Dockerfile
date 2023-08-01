@@ -1,11 +1,12 @@
 FROM mcr.microsoft.com/vscode/devcontainers/base:1-focal
 
 # install aws
-RUN apt-get update && \
-    apt-get install -y unzip python3-pip && \
-    pip3 install --no-cache-dir --upgrade awscli && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN SYSTEM_ARCH=$(uname -m) \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-${SYSTEM_ARCH}.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && aws/install \
+    && aws --version \
+    && rm -rf aws
 
 # install terraform
 ENV TERRAFORM_VERSION=1.5.1
