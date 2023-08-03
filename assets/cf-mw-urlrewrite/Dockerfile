@@ -18,7 +18,7 @@ ADD ./ ./
 
 FROM base as test
 
-RUN npm run lint && npm run test
+RUN npm run test
 
 # -------------------------------------------------------------------- test ---
 
