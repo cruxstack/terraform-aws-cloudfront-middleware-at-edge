@@ -3,13 +3,13 @@
 This Terraform module deploys customizable and reusable Lambda@Edge functions
 that provide middleware for AWS CloudFront.
 
-## Features
+## Middlewares
 
-- **Authentication & Authorization**: This feature provides authentication and
-  authorization to restrict access to a site hosted on CloudFront. Users can
-  optionally customize the authorization rules via an Open Policy Agent (OPA)
-  policy.
-- **URL Rewriting**: This feature rewrites the URLs of requests. Users can
+- **`auth-at-edge`**: Also known as `cognito-at-edge`, this feature provides
+  authentication and authorization to restrict access to a site hosted on
+  CloudFront. Users can _optionally_ customize the authorization rules via an
+  Open Policy Agent (OPA) policy.
+- **`url-rewriter`**: This feature rewrites the URLs of requests. Users can
   define URL rewrite rules via an Open Policy Agent (OPA) policy.
 
 ## Usage
@@ -49,7 +49,7 @@ module "cloudfront_middleware_at_edge" {
 
 In addition to the variables documented below, this module includes several
 other optional variables (e.g., `name`, `tags`, etc.) provided by the
-`cloudposse/label/null` module. Please refer to the [`cloudposse/label` documentation](https://registry.terraform.io/modules/cloudposse/label/null/latest)
+`cloudposse/label/null` module. Please refer to its [documentation](https://registry.terraform.io/modules/cloudposse/label/null/latest)
 for more details on these variables.
 
 | Name                      | Description                                                               |  Type  | Default | Required |
