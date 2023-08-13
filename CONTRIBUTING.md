@@ -34,7 +34,7 @@ following tools:
 1. Clone and open this repository:
 
     ```bash
-    git clone https://github.com/sgtoj/terraform-aws-cloudfront-middleware-at-edge.git
+    git clone https://github.com/cruxstack/terraform-aws-cloudfront-middleware-at-edge.git
     code terraform-aws-cloudfront-middleware-at-edge
     ```
 
