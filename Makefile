@@ -22,3 +22,6 @@ clean:
 	@find . -type d -name ".tfstate" -exec rm -rf {} +
 	@find . -type d -name ".tfstate.backup" -exec rm -rf {} +
 	@touch .devcontainer/.terraform.d/.gitkeep || true
+
+lint:
+	@tflint
