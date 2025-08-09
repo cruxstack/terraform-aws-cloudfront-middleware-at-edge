@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test:
+  test-code:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -15,13 +15,20 @@ jobs:
         uses: actions/setup-node@v3.7.0
         with:
           node-version: 18
-      - name: Tests for auth-at-edge
-        run: |
-          cd assets/cf-mw-auth
-          npm install
-          npm test
-      - name: Tests for url-rewriter
-        run: |
-          cd assets/cf-mw-urlrewrite
-          npm install
-          npm test
+
+  test-tf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Terraform Setup
+        run:  terraform init
+      - name: Terraform Validate
+        run:  terraform validate
+      - name: Lint Terraform
+        uses: reviewdog/action-tflint@master
+        with:
+          github_token: ${{ secrets.github_token }}
+          filter_mode: "nofilter"
