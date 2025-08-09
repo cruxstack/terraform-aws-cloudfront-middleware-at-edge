@@ -4,8 +4,9 @@ locals {
   auth_service_enabled       = local.enabled && var.auth_service_config.enabled
   urlrewrite_service_enabled = local.enabled && var.urlrewrite_service_config.enabled
 
-  aws_account_id  = try(coalesce(var.aws_account_id, data.aws_caller_identity.current[0].account_id), "") # tflint-ignore: terraform_unused_declarations
-  aws_region_name = try(coalesce(var.aws_region_name, data.aws_region.current[0].name), "")
+  aws_account_id  = one(data.aws_caller_identity.current.*.account_id)
+  aws_region_name = one(data.aws_region.current.*.region)
+  aws_partition   = one(data.aws_partition.current.*.partition)
 
   service_config = {
     rewrite_url = {
@@ -74,6 +75,10 @@ locals {
       result := []
     EOF
   )
+
+  iam_role_attachments = toset(module.this.enabled ? [
+    "arn:${local.aws_partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  ] : [])
 }
 
 data "aws_caller_identity" "current" {
@@ -82,6 +87,10 @@ data "aws_caller_identity" "current" {
 
 data "aws_region" "current" {
   count = module.this.enabled && var.aws_region_name == "" ? 1 : 0
+}
+
+data "aws_partition" "current" {
+  count = module.this.enabled ? 1 : 0
 }
 
 # ====================================================== middleware-services ===
@@ -134,15 +143,18 @@ resource "aws_iam_role" "this" {
     }]
   })
 
-  managed_policy_arns = [
-    "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-  ]
-
   tags = module.mw_service_label.tags
 
   lifecycle {
     create_before_destroy = true
   }
+}
+
+resource "aws_iam_role_policy_attachment" "this" {
+  for_each = local.iam_role_attachments
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = each.key
 }
 
 # ============================================================ auth-services ===
